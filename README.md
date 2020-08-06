@@ -4,7 +4,7 @@ This repository hosts some small utilities I wrote while looking into the way mo
 
 ## Example
 
-This are the color image and depth map from a Samsung S9+.
+This are the color image and depth map from [a photo taken with a Samsung S9+](20200806_111654.jpg).
 
 ![color view](cv.jpg "color view")
 
