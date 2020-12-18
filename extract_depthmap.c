@@ -516,6 +516,11 @@ int parse_samsung_trailer(const unsigned char *data, const size_t len,
           w_offset = 17;
           h_offset = 18;
         }
+        else if(version == 5)
+        {
+          w_offset = 20;
+          h_offset = 19;
+        }
         else
         {
           printf("unknown/unsupported version: %u\n", version);
