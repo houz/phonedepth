@@ -521,9 +521,15 @@ int parse_samsung_trailer(const unsigned char *data, const size_t len,
           w_offset = 20;
           h_offset = 19;
         }
+        else if(version == 6)
+        {
+          w_offset = 22;
+          h_offset = 21;
+        }
         else
         {
           printf("unknown/unsupported version: %u\n", version);
+          printf("depth map size: %u\n", depth_map_size);
           puts("DualShot_Extra_Info:");
           print_hex(file_data, directory - offset, size);
           continue;
