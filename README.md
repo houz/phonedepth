@@ -24,9 +24,13 @@ The most useful tool is `extract_depthmap.c` which was tested to work with these
 - Huawei P30 Pro
 - Samsung A7
 - Samsung A9
+- Samsung S9+
 - Samsung S10
 - Samsung S10e
-- Samsung S9+
+- Samsung S20 FE
+- Samsung S20 Ultra
+
+However, the firmware version might be more important than the actual phone.
 
 In order to use it you have to compile it:
 
