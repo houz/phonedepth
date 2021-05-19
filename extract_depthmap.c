@@ -683,12 +683,13 @@ int parse_apple_trailer(const unsigned char *data, const unsigned char **cv, siz
   *mask_type = TYPE_JPEG;
   unsigned char *trailer2;
 
-  // other times it has more masks which displaces the location of the depth photo, so
+  // other times it has four JPEGS which displaces the location of the depth photo, so
   // if there are still photos left
   if(trailer + 2 < file_data + file_size){
     trailer2 =  (unsigned char*)parse_jpeg(trailer, &_orientation);
-    if (trailer2 == 0){
+    if (trailer2 == 0){ // if there are no more photos
       if (*mask_size > 0 && *dm_size > *mask_size){
+        // if the new found photo is not empty
         *dm_size = file_size - *cv_size - *dm_size;
         *dm = trailer;
       }
@@ -696,6 +697,7 @@ int parse_apple_trailer(const unsigned char *data, const unsigned char **cv, siz
     }
     *mask_size = trailer2 - trailer;
   }
+  // this possibly could be the depth photo, if there are no more photos
     if (*mask_size > 0 && *dm_size > *mask_size){
     *dm_size = file_size - *cv_size - *dm_size;
     *dm = trailer;
@@ -710,7 +712,7 @@ int parse_apple_trailer(const unsigned char *data, const unsigned char **cv, siz
   size_t *placeholder_dm_size = dm_size;
   int how_many_photos = 0;
 
-  // if there are still photos left
+  // if there are still photos left (its probably a selfie)
   for (int i = 0 ; i < 5; i++){
     // if the place at the start of the last photo accessed is less than the entire file size
     // there is data left so lets keep going!
@@ -749,6 +751,7 @@ int parse_apple_trailer(const unsigned char *data, const unsigned char **cv, siz
       }
     how_many_photos = i;
  }
+ // this was found just by experimenting with a lot of photos
 if(how_many_photos >= 4){
     *dm_size = *placeholder_dm_size;
     *dm = *placeholder_dm ;
